@@ -250,15 +250,15 @@ std::string getFileByPathAsString(std::string path)
 
 void writeStringToFileAtPath(std::string path, std::string message)
 {
-    std::ofstream fout(getAbsoluteFilePath(path)); //i think this must create file, but check it anyway
-    if (!fout) {
+    std::ofstream fileOut(getAbsoluteFilePath(path)); //i think this must create file, but check it anyway
+    if (!fileOut) {
         std::cout << path + " not found" << std::endl;
         exit(1);
     } else {
         std::cout << path + " opened" << std::endl;
     }
-    fout << message;
-    fout.close();
+    fileOut << message;
+    fileOut.close();
 }
 
 
@@ -284,6 +284,7 @@ int main() {
     writeStringToFileAtPath(std::move(outputpath), std::move(cryptedtext));
 
     std::string inputPathToDecrypt;
+
     std::cin.ignore(10000,'\n');
     std::cout << "Enter file path to descrypt: " << std::endl;
     getline(std::cin, inputPathToDecrypt);
