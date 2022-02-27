@@ -269,6 +269,12 @@ std::string getFileByPathAsString(std::string path)
     return data;
 }
 
+
+/*! \fn writeStringToFileAtPath(std::string path, std::string message)
+ *  \brief A function to write string in file
+ *  \param path a result of getAbsoluteFilePath function.
+ *  \param message a string to save
+ */
 void writeStringToFileAtPath(std::string path, std::string message)
 {
     std::ofstream fileOut(getAbsoluteFilePath(path)); //i think this must create file, but check it anyway
