@@ -80,7 +80,6 @@ private:
 
     void encrypt(std::string& data, int *k2)
     {
-        //std::string inputData(std::move(data));
         std::string inputData = data;
         int dataSize = inputData.size();
         int k1size = (sizeof(_k1)/sizeof(_k1[0]));
@@ -204,10 +203,8 @@ private:
             {
                 char curCode = (char )table[currow-1][j];
                 _result += curCode;
-                //std::cout << curCode;
             }
         }
-        //std::cout << std::endl;
     }
 public:
     explicit Decryptor(std::string data, int *k2) : _data(std::move(data)), _k2(k2) {
