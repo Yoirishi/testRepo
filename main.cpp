@@ -33,7 +33,7 @@ private:
     static void setK2(int *k2, int k2size)
     {
         std::string length = std::to_string(k2size);
-        std::cout << "enter k2 with " + length + " size:" << std::endl;
+        std::cout << "enter k2 with " + length + " length:" << std::endl;
         for (int i = 0; i < k2size; i++)
         {
             std::cin >> k2[i];
@@ -133,14 +133,14 @@ private:
             table[i] = new int [k2size];
         }
 
-        int stringiter = 0;
+        int stringIter = 0;
         for (int j = 0; j < k2size; j++)
         {
-            int curcolumn = _k2[j];
+            int curColumn = _k2[j];
             for (int i = 0; i<k1size; i++)
             {
-                table[i][curcolumn-1] = _data[stringiter];
-                stringiter++;
+                table[i][curColumn-1] = _data[stringIter];
+                stringIter++;
             }
         }
 
