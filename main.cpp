@@ -294,10 +294,10 @@ void writeStringToFileAtPath(std::string path, std::string message)
 int main() {
 
     Printer printer;
-    std::string message = "Enter file path to encrypt: ";
+    std::string beforeOpen = "Enter file path to encrypt: ";
 
     std::string inputPath;
-    printer.print(message, true);
+    printer.print(beforeOpen, true);
     //std::cout << "Enter file path to encrypt: " << std::endl;
     getline(std::cin, inputPath);
 
@@ -321,8 +321,8 @@ int main() {
     std::string inputPathToDecrypt;
 
     std::cin.ignore(10000,'\n');
-    message =  "Enter file path to descrypt: ";
-    printer.print(message, true);
+    beforeOpen =  "Enter file path to descrypt: ";
+    printer.print(beforeOpen, true);
     //std::cout << "Enter file path to descrypt: " << std::endl;
     getline(std::cin, inputPathToDecrypt);
 
