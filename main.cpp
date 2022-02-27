@@ -1,14 +1,24 @@
 #include <iostream>
 #include <bits/stdc++.h>
+#include "include/printer.h"
 
-
+/*! \class Encryptor
+ *  \brief This is a Encryptor class.
+ *
+ * Use to encrypt string with virtual table
+ */
 class Encryptor
 {
 private:
     int _k1[4] = {4, 1, 3, 2};
     std::string _encryptedData;
 
-
+/*! \fn isK2Invalid(int *k2, int k2size)
+ *  \brief check for k2 is valid to avoid data loss
+ *  \param int *k2 k2 for check validity.
+ *  \param int k2size size to iterate k2.
+ *  \return bool is k2 invalid
+ */
     static bool isK2Invalid(int *k2, int k2size)
     {
         int copyK2[k2size];
@@ -29,17 +39,28 @@ private:
         }
         return false;
     }
-
+/*! \fn static void setK2(int *k2, int k2size)
+ *  \brief set k2 to encrypt
+ *  \param int *k2 k2 to set.
+ *  \param int k2size size to iterate k2.
+ */
     static void setK2(int *k2, int k2size)
     {
         std::string length = std::to_string(k2size);
-        std::cout << "enter k2 with " + length + " size:" << std::endl;
+        std::cout << "enter k2 with " + length + " length:" << std::endl;
         for (int i = 0; i < k2size; i++)
         {
             std::cin >> k2[i];
         }
     }
 
+    /*! \fn int** setTable(std::string& data, int k2size)
+     *  \brief set table to crypt data
+     *  \param std::string& data - data to crypt
+     *  \param int k2size size to iterate k2.
+     *
+     *  \return table to encrypt
+     */
     int** setTable(std::string& data, int k2size)
     {
         int k1size = (sizeof(_k1)/sizeof(_k1[0]));
@@ -63,6 +84,14 @@ private:
         return table;
     }
 
+
+    /*! \fn int** setTable(std::string& data, int k2size)
+     *  \brief set table to crypt data
+     *  \param std::string& data - data to crypt
+     *  \param int k2size size to iterate k2.
+     *
+     *  \return table to encrypt
+     */
     void getEncrypted(std::string& data, int *k2, int k2size, int **table)
     {
         int k1size = (sizeof(_k1)/sizeof(_k1[0]));
@@ -78,6 +107,11 @@ private:
         _encryptedData = result;
     }
 
+    /*! \fn void encrypt(std::string& data, int *k2)
+     *  \brief encrypt data
+     *  \param std::string& data - data to crypt
+     *  \param int k2size size to iterate k2.
+     */
     void encrypt(std::string& data, int *k2)
     {
         std::string inputData = data;
@@ -106,6 +140,11 @@ private:
     }
 
 public:
+    /*! \fn explicit Encryptor(std::string& data, int *k2)
+     *  \brief class constructor
+     *  \param std::string& data - data to crypt
+     *  \param int k2size size to iterate k2.
+     */
     explicit Encryptor(std::string& data, int *k2) {
         encrypt(data, k2);
     };
@@ -116,6 +155,11 @@ public:
     }
 };
 
+/*! \class Decryptor
+ *  \brief This is a Decryptor class.
+ *
+ * Use to decrypt string with virtual table
+ */
 class Decryptor
 {
 private:
@@ -133,14 +177,14 @@ private:
             table[i] = new int [k2size];
         }
 
-        int stringiter = 0;
+        int stringIter = 0;
         for (int j = 0; j < k2size; j++)
         {
-            int curcolumn = _k2[j];
+            int curColumn = _k2[j];
             for (int i = 0; i<k1size; i++)
             {
-                table[i][curcolumn-1] = _data[stringiter];
-                stringiter++;
+                table[i][curColumn-1] = _data[stringIter];
+                stringIter++;
             }
         }
 
@@ -217,6 +261,12 @@ public:
     }
 };
 
+
+/*! \fn getAbsoluteFilePath(const std::string& path)
+ *  \brief A function to get absolute path
+ *  \param path a string.
+ *  \return absolute file path
+ */
 std::string getAbsoluteFilePath(const std::string& path)
 {
     if (path[1] == ':')
@@ -226,10 +276,16 @@ std::string getAbsoluteFilePath(const std::string& path)
     return (std::filesystem::current_path().generic_string() + "\\" + path);
 }
 
+
+/*! \fn getFileByPathAsString(std::string path)
+ *  \brief A function to get file as string
+ *  \param path a result of getAbsoluteFilePath function.
+ *  \return string with content of file
+ */
 std::string getFileByPathAsString(std::string path)
 {
-    std::ifstream fin(getAbsoluteFilePath(path), std::ios::in);
-    if (!fin) {
+    std::ifstream fileIn(getAbsoluteFilePath(path), std::ios::in);
+    if (!fileIn) {
         std::cout << path + " not found" << std::endl;
         exit(1);
     } else {
@@ -238,35 +294,45 @@ std::string getFileByPathAsString(std::string path)
 
 
     std::string data;
-    if(fin) {
+    if(fileIn) {
         std::ostringstream ss;
-        ss << fin.rdbuf();
+        ss << fileIn.rdbuf();
         data = ss.str();
     }
-    fin.close();
+    fileIn.close();
 
     return data;
 }
 
+
+/*! \fn writeStringToFileAtPath(std::string path, std::string message)
+ *  \brief A function to write string in file
+ *  \param path a result of getAbsoluteFilePath function.
+ *  \param message a string to save
+ */
 void writeStringToFileAtPath(std::string path, std::string message)
 {
-    std::ofstream fout(getAbsoluteFilePath(path)); //i think this must create file, but check it anyway
-    if (!fout) {
+    std::ofstream fileOut(getAbsoluteFilePath(path)); //i think this must create file, but check it anyway
+    if (!fileOut) {
         std::cout << path + " not found" << std::endl;
         exit(1);
     } else {
         std::cout << path + " opened" << std::endl;
     }
-    fout << message;
-    fout.close();
+    fileOut << message;
+    fileOut.close();
 }
 
 
 
 int main() {
 
+    Printer printer;
+    std::string info = "Enter file path to encrypt: ";
+
     std::string inputPath;
-    std::cout << "Enter file path to encrypt: " << std::endl;
+    printer.print(info, true);
+    //std::cout << "Enter file path to encrypt: " << std::endl;
     getline(std::cin, inputPath);
 
     std::string encryptedMessage = std::move(getFileByPathAsString(std::move(inputPath)));
@@ -276,16 +342,22 @@ int main() {
     Encryptor encryptor = Encryptor(encryptedMessage, k2);
     std::string cryptedtext = encryptor.getValue();
 
+    std::string beforeSave = "Enter file path to save: ";
+
     std::string outputpath;
     std::cin.ignore(10000,'\n');
-    std::cout << "Enter file path to save: " << std::endl;
+    printer.print(beforeSave, true);
+    //std::cout << "Enter file path to save: " << std::endl;
     getline(std::cin, outputpath);
 
     writeStringToFileAtPath(std::move(outputpath), std::move(cryptedtext));
 
     std::string inputPathToDecrypt;
+
     std::cin.ignore(10000,'\n');
-    std::cout << "Enter file path to descrypt: " << std::endl;
+    info =  "Enter file path to descrypt: ";
+    printer.print(info, true);
+    //std::cout << "Enter file path to descrypt: " << std::endl;
     getline(std::cin, inputPathToDecrypt);
 
     std::string decryptedMessage;
@@ -298,7 +370,8 @@ int main() {
 
     std::string outputpathdesc;
     std::cin.ignore(10000,'\n');
-    std::cout << "Enter file path to save: " << std::endl;
+    printer.print(message, true);
+    //std::cout << "Enter file path to save: " << std::endl;
     getline(std::cin, outputpathdesc);
 
     writeStringToFileAtPath(std::move(outputpathdesc), std::move(result));
