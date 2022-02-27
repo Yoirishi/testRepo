@@ -228,8 +228,8 @@ std::string getAbsoluteFilePath(const std::string& path)
 
 std::string getFileByPathAsString(std::string path)
 {
-    std::ifstream fin(getAbsoluteFilePath(path), std::ios::in);
-    if (!fin) {
+    std::ifstream fileIn(getAbsoluteFilePath(path), std::ios::in);
+    if (!fileIn) {
         std::cout << path + " not found" << std::endl;
         exit(1);
     } else {
@@ -238,12 +238,12 @@ std::string getFileByPathAsString(std::string path)
 
 
     std::string data;
-    if(fin) {
+    if(fileIn) {
         std::ostringstream ss;
-        ss << fin.rdbuf();
+        ss << fileIn.rdbuf();
         data = ss.str();
     }
-    fin.close();
+    fileIn.close();
 
     return data;
 }
