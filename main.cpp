@@ -120,7 +120,11 @@ public:
     }
 };
 
-
+/*! \class Decryptor
+ *  \brief This is a Decryptor class.
+ *
+ * Use to decrypt string with virtual table
+ */
 class Decryptor
 {
 private:
