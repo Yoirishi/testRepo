@@ -220,7 +220,7 @@ public:
     }
 };
 
-std::string getAbsoluteFilePath(std::string path)
+std::string getAbsoluteFilePath(const std::string& path)
 {
     if (path[1] == ':')
     {
