@@ -226,6 +226,12 @@ public:
     }
 };
 
+
+/*! \fn getAbsoluteFilePath(const std::string& path)
+ *  \brief A function to get absolute path
+ *  \param path a string.
+ *  \return absolute file path
+ */
 std::string getAbsoluteFilePath(const std::string& path)
 {
     if (path[1] == ':')
@@ -235,6 +241,12 @@ std::string getAbsoluteFilePath(const std::string& path)
     return (std::filesystem::current_path().generic_string() + "\\" + path);
 }
 
+
+/*! \fn getFileByPathAsString(std::string path)
+ *  \brief A function to get file as string
+ *  \param path a result of getAbsoluteFilePath function.
+ *  \return string with content of file
+ */
 std::string getFileByPathAsString(std::string path)
 {
     std::ifstream fileIn(getAbsoluteFilePath(path), std::ios::in);
