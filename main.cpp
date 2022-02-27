@@ -13,7 +13,12 @@ private:
     int _k1[4] = {4, 1, 3, 2};
     std::string _encryptedData;
 
-
+/*! \fn isK2Invalid(int *k2, int k2size)
+ *  \brief check for k2 is valid to avoid data loss
+ *  \param int *k2 k2 for check validity.
+ *  \param int k2size size to iterate k2.
+ *  \return bool is k2 invalid
+ */
     static bool isK2Invalid(int *k2, int k2size)
     {
         int copyK2[k2size];
@@ -34,7 +39,11 @@ private:
         }
         return false;
     }
-
+/*! \fn static void setK2(int *k2, int k2size)
+ *  \brief set k2 to encrypt
+ *  \param int *k2 k2 to set.
+ *  \param int k2size size to iterate k2.
+ */
     static void setK2(int *k2, int k2size)
     {
         std::string length = std::to_string(k2size);
@@ -45,6 +54,13 @@ private:
         }
     }
 
+    /*! \fn int** setTable(std::string& data, int k2size)
+     *  \brief set table to crypt data
+     *  \param std::string& data - data to crypt
+     *  \param int k2size size to iterate k2.
+     *
+     *  \return table to encrypt
+     */
     int** setTable(std::string& data, int k2size)
     {
         int k1size = (sizeof(_k1)/sizeof(_k1[0]));
@@ -68,6 +84,14 @@ private:
         return table;
     }
 
+
+    /*! \fn int** setTable(std::string& data, int k2size)
+     *  \brief set table to crypt data
+     *  \param std::string& data - data to crypt
+     *  \param int k2size size to iterate k2.
+     *
+     *  \return table to encrypt
+     */
     void getEncrypted(std::string& data, int *k2, int k2size, int **table)
     {
         int k1size = (sizeof(_k1)/sizeof(_k1[0]));
@@ -83,6 +107,11 @@ private:
         _encryptedData = result;
     }
 
+    /*! \fn void encrypt(std::string& data, int *k2)
+     *  \brief encrypt data
+     *  \param std::string& data - data to crypt
+     *  \param int k2size size to iterate k2.
+     */
     void encrypt(std::string& data, int *k2)
     {
         std::string inputData = data;
@@ -111,6 +140,11 @@ private:
     }
 
 public:
+    /*! \fn explicit Encryptor(std::string& data, int *k2)
+     *  \brief class constructor
+     *  \param std::string& data - data to crypt
+     *  \param int k2size size to iterate k2.
+     */
     explicit Encryptor(std::string& data, int *k2) {
         encrypt(data, k2);
     };
