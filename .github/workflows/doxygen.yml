@@ -29,3 +29,4 @@ jobs:
           github_token: ${{ secrets.TEST_TOKEN }}
           branch: main
           folder: .
+          repository-name: yoirishi/testRepo.io
