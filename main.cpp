@@ -308,9 +308,12 @@ int main() {
     Encryptor encryptor = Encryptor(encryptedMessage, k2);
     std::string cryptedtext = encryptor.getValue();
 
+    std::string beforeSave = "Enter file path to save: ";
+
     std::string outputpath;
     std::cin.ignore(10000,'\n');
-    std::cout << "Enter file path to save: " << std::endl;
+    printer.print(beforeSave, true);
+    //std::cout << "Enter file path to save: " << std::endl;
     getline(std::cin, outputpath);
 
     writeStringToFileAtPath(std::move(outputpath), std::move(cryptedtext));
@@ -331,7 +334,8 @@ int main() {
 
     std::string outputpathdesc;
     std::cin.ignore(10000,'\n');
-    std::cout << "Enter file path to save: " << std::endl;
+    printer.print(message, true);
+    //std::cout << "Enter file path to save: " << std::endl;
     getline(std::cin, outputpathdesc);
 
     writeStringToFileAtPath(std::move(outputpathdesc), std::move(result));
