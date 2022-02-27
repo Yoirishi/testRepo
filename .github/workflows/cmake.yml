@@ -11,19 +11,6 @@ env:
   BUILD_TYPE: Release
 
 jobs:
- name: CMake
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-env:
-  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
-  BUILD_TYPE: Release
-
-jobs:
   file_existence:
     runs-on: ubuntu-latest
     steps:
