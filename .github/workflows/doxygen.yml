@@ -23,10 +23,15 @@ jobs:
         run: doxygen
         shell: bash
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+
+
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.TEST_KEY }}
         with:
-          access_token: ${{ secrets.TEST_KEY }}
-          branch: main
-          folder: .
-          REPOSITORY_NAME: yoirishi/testRepo.io
+          source-directory: 'Doxygen'
+          destination-github-username: 'Yoirishi'
+          destination-repository-name: 'testRepo.io'
+          user-email: undertaker_zdv@mail.ru
+          target-branch: main
