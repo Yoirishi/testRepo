@@ -12,7 +12,7 @@
 class Printer {
 public:
     Printer() = default;
-    void print(std::string text, bool endline)
+    void print(const std::string& text, bool endline)
     {
         std::cout << text << endline ? "\n" : "";
     }
