@@ -370,7 +370,7 @@ int main() {
 
     std::string outputpathdesc;
     std::cin.ignore(10000,'\n');
-    printer.print(test, true);
+    printer.print(beforeSave, true);
     //std::cout << "Enter file path to save: " << std::endl; 123
     getline(std::cin, outputpathdesc);
 
