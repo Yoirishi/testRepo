@@ -1,7 +1,11 @@
 #include <iostream>
 #include <bits/stdc++.h>
 
-
+/*! \class Encryptor
+ *  \brief This is a Encryptor class.
+ *
+ * Use to encrypt string with virtual table
+ */
 class Encryptor
 {
 private:
@@ -115,6 +119,7 @@ public:
         return _encryptedData;
     }
 };
+
 
 class Decryptor
 {
