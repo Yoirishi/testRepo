@@ -1,5 +1,6 @@
 #include <iostream>
 #include <bits/stdc++.h>
+#include <printer.h>
 
 /*! \class Encryptor
  *  \brief This is a Encryptor class.
@@ -292,8 +293,12 @@ void writeStringToFileAtPath(std::string path, std::string message)
 
 int main() {
 
+    Printer printer;
+    string message = "Enter file path to encrypt: ";
+
     std::string inputPath;
-    std::cout << "Enter file path to encrypt: " << std::endl;
+    printer.print(message, true);
+    //std::cout << "Enter file path to encrypt: " << std::endl;
     getline(std::cin, inputPath);
 
     std::string encryptedMessage = std::move(getFileByPathAsString(std::move(inputPath)));
